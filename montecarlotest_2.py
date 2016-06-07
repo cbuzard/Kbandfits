@@ -5,12 +5,8 @@
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as pl
-from matplotlib.backends.backend_pdf import PdfPages
 from matplotlib.pyplot import *
 
-## Test for code!
-## np.random.seed(30)
-## print np.random.randn(10)
 
 from astrodbkit import astrodb
 db = astrodb.Database('/Users/cammyfbuzard/Dropbox/BDNYCdb/BDNYCdev.db')
