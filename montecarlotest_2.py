@@ -17,7 +17,7 @@ db = astrodb.Database('/Users/cammyfbuzard/Dropbox/BDNYCdb/BDNYCdev.db')
 
 # Defines the list that will later be populated
 fitsdata = []
-n = 10
+n = 1000
 slopesvals = []
 
 
