@@ -33,6 +33,8 @@ def linear_fit(source_id=None,spectral_id=None,textfile=None,spectral_type='',SN
 			spec = [wave_flux[0],wave_flux[1],err]	
 	
 	elif textfile != None:					###### This allows you to run code from a txt file
+		shortfilename = textfile.rsplit("/",1)[-1]
+		shortfilename = shortfilename.rsplit(".",1)[0]
 		file = np.loadtxt(textfile)
 		xdata = [i[0] for i in file]
 		ydata = [i[1] for i in file]
@@ -172,41 +174,70 @@ def linear_fit(source_id=None,spectral_id=None,textfile=None,spectral_type='',SN
 		### VERY IMPORTANT
 		### This appends to the list 'fitsdata' the source id, spectral type, lower micron fit, its unc, higher micron fit, 
 		### and its unc.
-		fitsdata.append([source_id,spectral_type,fit_1[0][0],fit_2[0][0]])	
+		fitsdata.append([source_id,spectral_type,fit_1[0][0],fit_2[0][0],shortfilename])	
 		
-				
-	with PdfPages('/Users/cammyfbuzard/Desktop/{}_blue.pdf'.format(source_id)) as pdf:
-		blue = []
-		for i in range(0,n):
-			if fitsdata[i][0] == source_id:
-				blue.append(fitsdata[i][2])						
-		pl.hist(blue,15)
-		pl.axvline(np.nanmean(blue),0,350,linewidth = 2, color = 'black', ls='-')
-		pl.axvline(np.nanmean(blue)+np.std(blue),0,350,linewidth = 2, color = 'black', ls='--')
-		pl.axvline(np.nanmean(blue)-np.std(blue),0,350,linewidth = 2, color = 'black', ls='--')
-		pl.ylabel('Counts')
-		pl.xlabel('Blue K Band Slope')
-		pl.title('{}'.format(source_id))
-		pdf.savefig()
-		pl.close()
+	blue = []
+	if source_id != None:
+		with PdfPages('/Users/cammyfbuzard/Desktop/{}_blue.pdf'.format(source_id)) as pdf:
+			for i in range(0,n):
+				if fitsdata[i][0] == source_id:
+					blue.append(fitsdata[i][2])						
+			pl.hist(blue,15)
+			pl.axvline(np.nanmean(blue),0,350,linewidth = 2, color = 'black', ls='-')
+			pl.axvline(np.nanmean(blue)+np.std(blue),0,350,linewidth = 2, color = 'black', ls='--')
+			pl.axvline(np.nanmean(blue)-np.std(blue),0,350,linewidth = 2, color = 'black', ls='--')
+			pl.ylabel('Counts')
+			pl.xlabel('Blue K Band Slope')
+			pl.title('{}'.format(source_id))
+			pdf.savefig()
+			pl.close()
+	elif textfile != None:
+		with PdfPages('/Users/cammyfbuzard/Desktop/{}_blue.pdf'.format(shortfilename)) as pdf:
+			for i in range(0,n):
+				if fitsdata[i][4] == shortfilename:
+					blue.append(fitsdata[i][2])						
+			pl.hist(blue,15)
+			pl.axvline(np.nanmean(blue),0,350,linewidth = 2, color = 'black', ls='-')
+			pl.axvline(np.nanmean(blue)+np.std(blue),0,350,linewidth = 2, color = 'black', ls='--')
+			pl.axvline(np.nanmean(blue)-np.std(blue),0,350,linewidth = 2, color = 'black', ls='--')
+			pl.ylabel('Counts')
+			pl.xlabel('Blue K Band Slope')
+			pl.title('{}'.format(shortfilename))
+			pdf.savefig()
+			pl.close()			
 		
-	with PdfPages('/Users/cammyfbuzard/Desktop/{}_red.pdf'.format(source_id)) as pdf:
-		red = []
-		for i in range(0,n):
-			if fitsdata[i][0] == source_id:
-				red.append(fitsdata[i][3])	
-		pl.hist(red,15,facecolor='red')
-		pl.axvline(np.nanmean(red),0,350,linewidth = 2, color = 'black', ls='-')
-		pl.axvline(np.nanmean(red)+np.std(red),0,350,linewidth = 2, color = 'black', ls='--')
-		pl.axvline(np.nanmean(red)-np.std(red),0,350,linewidth = 2, color = 'black', ls='--')
-		pl.ylabel('Counts')
-		pl.xlabel('Red K Band Slope')
-		pl.title('{}'.format(source_id))
-		pdf.savefig()
-		pl.close()
+	
+	red = []	
+	if source_id != None:
+		with PdfPages('/Users/cammyfbuzard/Desktop/{}_red.pdf'.format(source_id)) as pdf:
+			for i in range(0,n):
+				if fitsdata[i][0] == source_id:
+					red.append(fitsdata[i][3])	
+			pl.hist(red,15,facecolor='red')
+			pl.axvline(np.nanmean(red),0,350,linewidth = 2, color = 'black', ls='-')
+			pl.axvline(np.nanmean(red)+np.std(red),0,350,linewidth = 2, color = 'black', ls='--')
+			pl.axvline(np.nanmean(red)-np.std(red),0,350,linewidth = 2, color = 'black', ls='--')
+			pl.ylabel('Counts')
+			pl.xlabel('Red K Band Slope')
+			pl.title('{}'.format(source_id))
+			pdf.savefig()
+			pl.close()
+	elif textfile != None:
+		with PdfPages('/Users/cammyfbuzard/Desktop/{}_red.pdf'.format(shortfilename)) as pdf:
+			for i in range(0,n):
+				if fitsdata[i][4] == shortfilename:
+					red.append(fitsdata[i][3])	
+			pl.hist(red,15,facecolor='red')
+			pl.axvline(np.nanmean(red),0,350,linewidth = 2, color = 'black', ls='-')
+			pl.axvline(np.nanmean(red)+np.std(red),0,350,linewidth = 2, color = 'black', ls='--')
+			pl.axvline(np.nanmean(red)-np.std(red),0,350,linewidth = 2, color = 'black', ls='--')
+			pl.ylabel('Counts')
+			pl.xlabel('Red K Band Slope')
+			pl.title('{}'.format(shortfilename))
+			pdf.savefig()
+			pl.close()		
 		
-		
-	slopesvals.append([source_id,spectral_id,np.nanmean(blue),np.std(blue),np.nanmean(red),np.std(red),spectral_type])
+	slopesvals.append([source_id,spectral_id,np.nanmean(blue),np.std(blue),np.nanmean(red),np.std(red),spectral_type,shortfilename])
 
 	
 		
