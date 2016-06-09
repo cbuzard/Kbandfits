@@ -101,6 +101,12 @@ sources = sources.dropna()
 lowgrav = []			
 for i,j in zip(sources[0],sources[1]):
 	lowgrav.append([i,j])
+
+##### Add in the ones not in planet_sample
+J1147 = [1516,2719]
+PSO318 = [1721,23]
+lowgrav.append(J1147)
+lowgrav.append(PSO318)
 	
 	
 ### Run
