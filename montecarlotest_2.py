@@ -21,6 +21,7 @@ def linear_fit(source_id=None,spectral_id=None,textfile=None,spectral_type='',SN
 	fitsdata = []
 	
 	if source_id != None and spectral_id != None:			#### run code from BDNYC database
+		shortfilename = None
 		if SNR == 0:
 			spec = db.query("SELECT spectrum FROM spectra WHERE id={}".format(spectral_id), fetch='one')[0]
 			spec = spec.data
