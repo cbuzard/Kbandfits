@@ -88,47 +88,28 @@ def linear_fit(source_id=None,spectral_id=None,textfile=None,spectral_type='',SN
 		
 		
 		""" Slope 1 """
-		### If the spectral type is less than L5, fit from 2.05 to 2.14	
-		if spectral_type < 15:
-			xmin = 2.05
-			xmax = 2.14
+		xmin = 2.03
+		xmax = 2.1
 
-			## gets x values of just region being fit
-			df_blue_1 = df_toplot.copy()
-			df_blue_1[1] = flux2						#### shifted y values
+		## gets x values of just region being fit
+		df_blue_1 = df_toplot.copy()
+		df_blue_1[1] = flux2						#### shifted y values
 			
 			
-			df_blue_1 = df_blue_1[df_blue_1[0] < xmax]
-			df_blue_1 = df_blue_1[df_blue_1[0] > xmin]
+		df_blue_1 = df_blue_1[df_blue_1[0] < xmax]
+		df_blue_1 = df_blue_1[df_blue_1[0] > xmin]
 			
 
-			## Fits the selected region to a line and gives a covariance matrix.
-			fit_1 = np.polyfit(df_blue_1[0],df_blue_1[1],1,cov=True,full=False)				
+		## Fits the selected region to a line and gives a covariance matrix.
+		fit_1 = np.polyfit(df_blue_1[0],df_blue_1[1],1,cov=True,full=False)				
 			
 	
-			## Plots the line fit on the spectrum. 
-			#x = np.linspace(xmin,xmax,10000)	
-			#y = fit_1[0][0]*x + fit_1[0][1]	
-			#pl.plot(x,y,'b',linewidth=2) 
+		## Plots the line fit on the spectrum. 
+		#x = np.linspace(xmin,xmax,10000)	
+		#y = fit_1[0][0]*x + fit_1[0][1]	
+		#pl.plot(x,y,'b',linewidth=2) 
 			
 			
-		
-		### If the spectral type is L5 or above, the fit is from 2.02 to 2.1 microns. Everything else is the same as above.
-		elif spectral_type >= 15:
-			xmin = 2.02
-			xmax = 2.1
-			
-			df_blue_2 = df_toplot.copy()
-			df_blue_2[1] = flux2
-			
-			df_blue_2 = df_blue_2[df_blue_2[0] < xmax]
-			df_blue_2 = df_blue_2[df_blue_2[0] > xmin]
-			
-			fit_1 = np.polyfit(df_blue_2[0],df_blue_2[1],1,cov=True,full=False)				
-			
-			#x2 = np.linspace(xmin,xmax,10000)	
-			#y2 = fit_1[0][0]*x2 + fit_1[0][1]		
-			#pl.plot(x2,y2,'c',linewidth=2)		
 			
 
 		""" slope 2 """
