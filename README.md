@@ -1,5 +1,5 @@
 # Kbandfits 
-This repository contains code to normalize brown dwarf K band spectra and fit it in portions to lines. 
+In this project, I analyzed infrared data from brown dwarfs to reveal how prevalent water and CO absorption was at different temperatures and pressures. To do so, I normalized low resolution brown dwarf K-band spectra and performed linear fits to the spectral portions absorbed by various molecular species. I used a Monte Carlo analysis to estimate the error on the linear fits. 
 
 montecarlotest_2 defines function to fit K bands:
 
